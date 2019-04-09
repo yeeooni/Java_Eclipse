@@ -18,43 +18,142 @@ public class HaksaDao {
 	public void register(HaksaDto haksa) {
 
 		try {
-			
-			String select = "Insert into School values(?, ?, ?, ?)";
-			
-			conn = pstm.getConnection();
-			pstm = conn.prepareStatement(select);
-			
+
+			conn = getConnection();
+			String insert = "INSERT INTO SCHOOL(NAME, AGE, KEY, VALUE) VALUES(?, ?, ?, ?)";
+			pstm = conn.prepareStatement(insert);
+
 			pstm.setString(1, haksa.getName());
 			pstm.setInt(2, haksa.getAge());
 			pstm.setInt(3, haksa.getKey());
 			pstm.setString(4, haksa.getValue());
-			
-			
+
+			int result = pstm.executeUpdate();
+
+			if (result > 0) {
+				System.out.println(haksa.getName() + "님의 DB 저장");
+			} else {
+				System.out.println("DB연결실패");
+			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
+		} finally {
+
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+				if (conn != null) {
+				}
+				conn.close();
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
 		}
-		
-		
-		
+
 	}
 
 	public HaksaDto findName(String name) {
-		return null;
+
+		HaksaDto result = null;
+
+		try {
+			conn = getConnection(); // DB에 연결되어있는 클래스 호출
+			String select = "SELECT s.name, s.age, s.key, j.key_name, s.value FROM SCHOOL s, JOB j WHERE s.KEY = j.KEY AND NAME=?";
+			pstm = conn.prepareStatement(select); // DB테이블 select
+
+			pstm.setString(1, name);
+			rs = pstm.executeQuery();
+
+			System.out.println("============================================");
+//			System.out.println("name", "age", "key", "keyName", "value");
+
+			while (rs.next()) {
+
+				int rage = rs.getInt(1);
+				String rname = rs.getString(2);
+				int rkey = rs.getInt(3);
+				String rkeyName = rs.getString(4);
+				String rvalue = rs.getString(5); // Date 타입 처리
+
+				result = new HaksaDto();
+
+				result.setName(rname);
+				result.setAge(rage);
+				result.setKey(rkey);
+				result.setKeyName(rkeyName);
+				result.setValue(rvalue);
+
+			}
+
+		} catch (SQLException sqle) {
+			System.out.println("SELECT문에서 예외 발생");
+			sqle.printStackTrace();
+
+		} finally {
+			// DB 연결을 종료한다.
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstm != null) {
+					pstm.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+		return result;
 	}
 
 	public int delete(String name) {
-		return 0;
+
+		int result = 0;
+
+		try {
+			conn = getConnection();
+			String delete = "DELETE FROM SCHOOL WHERE name = ?";
+			pstm = conn.prepareStatement(delete);
+		} catch (SQLException e2) {
+
+			e2.printStackTrace();
+		}
+		try {
+			pstm.setString(1, name);
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		}
+
+		try {
+			result = pstm.executeUpdate();
+
+			if (result > 0) {
+				System.out.println(name + "님의 정보를 삭제하였습니다.");
+			} else {
+				System.out.println("삭제 실패");
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	public ArrayList<HaksaDto> selectAll() {
+	public ArrayList<HaksaDto> selectAllList() {
 
 		ArrayList<HaksaDto> list = new ArrayList<HaksaDto>();
 
 		try {
-			String select = "SELECT * FROM School";
+			String select = "SELECT s.name, s.age, s.key, j.key_name, s.value FROM SCHOOL s, JOB j WHERE s.KEY = j.KEY";
 
-			conn = pstm.getConnection(); // DB에 연결되어있는 클래스 호출
+			conn = getConnection(); // DB에 연결되어있는 클래스 호출
 			pstm = conn.prepareStatement(select); // DB테이블 select
 			rs = pstm.executeQuery();
 
@@ -62,22 +161,20 @@ public class HaksaDao {
 //			System.out.println("name", "age", "key", "keyName", "value");
 
 			while (rs.next()) {
+
+				String rname = rs.getString(1);
+				int rage = rs.getInt(2);
+				int rkey = rs.getInt(3);
+				String rkeyName = rs.getString("KeyName");
+				String rvalue = rs.getString(4); // Date 타입 처리
+
 				HaksaDto haksadto = new HaksaDto();
 
-				String name = rs.getString(1);
-				int age = rs.getInt(2);
-				int key = rs.getInt(3);
-				String keyName = rs.getString(4);
-				String value = rs.getString(5); // Date 타입 처리
-
-				String result = name + "\t" + age + "\t" + key + "\t" + keyName + "\t" + value;
-				System.out.println(result);
-				
-				haksadto.setName(name);
-				haksadto.setAge(age);
-				haksadto.setKey(key);
-				haksadto.setKeyName(keyName);
-				haksadto.setValue(value);
+				haksadto.setName(rname);
+				haksadto.setAge(rage);
+				haksadto.setKey(rkey);
+				haksadto.setKeyName(rkeyName);
+				haksadto.setValue(rvalue);
 
 				list.add(haksadto);
 
@@ -106,32 +203,30 @@ public class HaksaDao {
 		return list;
 	}
 
-	public class DBConnection {
-//		public static Connection dbConn;
+//DB연결
 
-		public Connection getConnection() {
+	public Connection getConnection() {
 
-			String user = "kitri";
-			String pw = "kitri";
-			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String user = "kitri";
+		String pw = "kitri";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
-			try {
+		try {
 
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				conn = DriverManager.getConnection(url, user, pw);
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection(url, user, pw);
 
-				System.out.print("Database에 연결성공.\n");
+			System.out.print("Database에 연결성공.\n");
 
-			} catch (ClassNotFoundException cnfe) {
-				System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
-			} catch (SQLException sqle) {
-				System.out.println("DB 접속실패 : " + sqle.toString());
-			} catch (Exception e) {
-				System.out.println("Unkonwn error");
-				e.printStackTrace();
-			}
-			return conn;
-		};
-	}
+		} catch (ClassNotFoundException cnfe) {
+			System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
+		} catch (SQLException sqle) {
+			System.out.println("DB 접속실패 : " + sqle.toString());
+		} catch (Exception e) {
+			System.out.println("Unkonwn error");
+			e.printStackTrace();
+		}
+		return conn;
+	};
 
 }

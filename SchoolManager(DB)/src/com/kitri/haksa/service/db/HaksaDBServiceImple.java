@@ -4,15 +4,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kitri.haksa.data.HaksaDto;
+import com.kitri.haksa.data.db.HaksaDto;
 
 public class HaksaDBServiceImple implements HaksaService {
 
 	private BufferedReader in;
-	List<HaksaDao> list = new ArrayList<HaksaDao>();
+	ArrayList<HaksaDto> list = new ArrayList<HaksaDto>();
 	HaksaDao haksadao;
 	HaksaDto haksadto;
-	
+
 	public HaksaDBServiceImple() {
 		super();
 		in = new BufferedReader(new InputStreamReader(System.in));
@@ -25,7 +25,7 @@ public class HaksaDBServiceImple implements HaksaService {
 		// 메뉴 화면 입니다.
 
 		System.out.println("===== 메뉴 선택 =====");
-		System.out.print("1. 등록" + "\n" + "2. 찾기" + "\n" + "3. 삭제" + "\n" + "4. 전체 출력" );
+		System.out.print("1. 등록" + "\n" + "2. 찾기" + "\n" + "3. 삭제" + "\n" + "4. 전체 출력" + "\n");
 		System.out.println("------------------");
 		System.out.println("0. 종료");
 		System.out.println("------------------");
@@ -83,7 +83,6 @@ public class HaksaDBServiceImple implements HaksaService {
 	public void registerMenu() {
 
 		try {
-
 			String number = null;
 			String value = null;
 			String age1 = "";
@@ -112,10 +111,11 @@ public class HaksaDBServiceImple implements HaksaService {
 				}
 				System.out.print("이름 : ");
 				String name = in.readLine().trim();
-
-				System.out.println("학번 : ");
+				System.out.print("학번 : ");
 				value = in.readLine().trim();
-				resister(new HaksaDto(age, name, Integer.parseInt(number) - 1, value));
+				setDTO(age, name, 0, "학생", value);
+				haksadao.register(haksadto);
+				
 				menu();
 				break;
 
@@ -124,22 +124,20 @@ public class HaksaDBServiceImple implements HaksaService {
 				age = Integer.parseInt(in.readLine().trim());
 				System.out.print("이름 : ");
 				name = in.readLine().trim();
-
-				System.out.println("과목 : ");
+				System.out.print("과목 : ");
 				value = in.readLine().trim();
-				resister(new HaksaDto(age, name, Integer.parseInt(number) - 1, value));
+				setDTO(age, name, 0, "교수", value);
 				menu();
 				break;
 
 			case "3":
-				System.out.println("나이 : ");
+				System.out.print("나이 : ");
 				age = Integer.parseInt(in.readLine().trim());
-				System.out.println("이름 : ");
+				System.out.print("이름 : ");
 				name = in.readLine().trim();
-
-				System.out.println("부서 : ");
+				System.out.print("부서 : ");
 				value = in.readLine().trim();
-				resister(new HaksaDto(age, name, Integer.parseInt(number) - 1, value));
+				setDTO(age, name, 0, "관리자", value);
 				menu();
 				break;
 
@@ -162,17 +160,17 @@ public class HaksaDBServiceImple implements HaksaService {
 
 	@Override
 	public void findNameMenu() {
+		System.out.println("찾을 이름을 입력해 주세요 : ");
 
 		try {
-			System.out.println("찾을 이름을 입력해 주세요 : ");
 //			in = new BufferedReader(new InputStreamReader(System.in));
 
 			String name = in.readLine().trim();
-			HaksaDto hd = findName(name);
+			HaksaDto haksadto = haksadao.findName(name);
 
-			if (hd != null) {
-				System.out.println("나이 : " + hd.getAge() + "\t이름 : " + hd.getName() + "\t" + hd.getKey() + " : "
-						+ hd.getValue());
+			if (haksadto != null) {
+				System.out.println("나이 : " + haksadto.getAge() + "\t이름 : " + haksadto.getName() + "\t"
+						+ haksadto.getKeyName() + " : " + haksadto.getValue());
 			} else
 				System.out.println("찾을 수 없습니다.");
 
@@ -205,36 +203,17 @@ public class HaksaDBServiceImple implements HaksaService {
 	}
 
 	@Override
-	public void resister(HaksaDto haksa) {
-
-	}
-	
-	
-	@Override
-	public HaksaDto findName(String name) {
-
-		int size = list.size();
-
-		for (int i = 0; i < size; i++) {
-			if (name.equals(list.get(i).getName())) {
-				return list.get(i);
-			}
-		}
-		return null;
-	}
-
-	@Override
 	public void deleteMenu() {
-		System.out.println("삭제할 사람의 이름을 입력해주세요.");
 
 		try {
+			System.out.println("삭제할 사람의 이름을 입력해주세요.");
 			String name = in.readLine();
 
-//			int deleteName = delete(in.readLine());
+			int deleteName = haksadao.delete(name);
 
-			if (delete(name) == 1) {
+			if (deleteName == 1) {
 				System.out.println(name + "님을 삭제하였습니다.");
-			} else if (delete(name) == 0) {
+			} else {
 				System.out.println("삭제할 사람이 없습니다.");
 			}
 
@@ -267,33 +246,19 @@ public class HaksaDBServiceImple implements HaksaService {
 	}
 
 	@Override
-	public int delete(String name) {
-
-		int size = list.size();
-
-		for (int i = 0; i < size; i++) {
-			if (name.equals(list.get(i).getName())) {
-				list.remove(i);
-				return 1;
-			}
-		}
-
-		return 0;
-	}
-
-	@Override
 	public void selectAll() {
-		
-		
+
+		list = haksadao.selectAllList();
+
 		int size = list.size();
 
 		for (int i = 0; i < size; i++) {
-			System.out.println("나이 : " + list.get(i).getAge() + "\t이름 : " + list.get(i).getName() + "\t"
-					+ list.get(i).getKey() + .getkeyName() +  " : " + list.get(i).getValue());
+			System.out.println("이름 : " + list.get(i).getName() + "\t 나이 : " + list.get(i).getAge() + "\t "
+					+ list.get(i).getKeyName() + "\t" + list.get(i).getValue());
 		}
-
 		System.out.println("계속 하시려면 1, 종료 하시려면 0을 입력해주세요.");
 		String input;
+
 		try {
 			input = in.readLine();
 			int ip = Integer.parseInt(input);
@@ -316,10 +281,8 @@ public class HaksaDBServiceImple implements HaksaService {
 			}
 
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -327,6 +290,14 @@ public class HaksaDBServiceImple implements HaksaService {
 		System.out.println("프로그램이 종료되었습니다.");
 		System.exit(0);
 
+	}
+
+	public void setDTO(int age, String name, int key, String KeyName, String value) {
+		haksadto.setAge(age);
+		haksadto.setName(name);
+		haksadto.setKey(key);
+		haksadto.setKeyName(KeyName);
+		haksadto.setValue(value);
 	}
 
 }

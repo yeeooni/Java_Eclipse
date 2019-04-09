@@ -8,17 +8,7 @@ public class HaksaDto {
 	private String keyName;
 	private String value;
 
-	public HaksaDto(String name, int age, int key, String keyName, String value) {
-		
-		this.name = name;
-		this.age = age;
-		this.key = key;
-		this.keyName = keyName;
-		this.value = value;
-		
-	}
-	
-	
+
 	public int getAge() {
 		return age;
 	}
