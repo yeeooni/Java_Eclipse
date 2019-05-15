@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+		<style type="text/css">
+			table {
+				width: 300px;
+				/*선의두께*/ /*선의 종류*/ /*선의 색깔*/
+				border: 1px solid steelblue;
+			}
+			
+			td {
+				border: 1px dotted black;
+				font-family: 맑은고딕;
+				font-size: 15pt;
+				font-weight: bold;
+			}
+			
+			.td1 {
+				background-color: orange;
+				text-align: center;
+			}
+			
+			.td2 {
+				background-color: pink;
+			}
+		</style>
+	
+			<script>
+				//전역변수 answer의 중복을 방지하기 위해서 
+				var idx = 0;
+			
+				function appendAnswer() {
+					idx++;
+					var input = document.createElement("input");//<input> <tr> </tr>
+					input.setAttribute("type", "text"); //<input type = "text">
+					input.setAttribute("name", "answer"); //<input type = "text" name ="answer">
+					
+					// <input type = "text" name ="answer" id = "answer">
+					
+					var btn = document.createElement("input");
+					btn.setAttribute("type", "button");
+					btn.setAttribute("value", "삭제");
+					btn.setAttribute("onclick", "deleteAnswer(" + idx + ");");
+			
+					var div = document.createElement("div");
+					div.setAttribute("id", "answer" + idx);
+					
+					div.appendChild(input);
+					div.appendChild(btn);
+					
+					//span 입장에서는 input이 자식이다.
+					var span = document.getElementById("answerSpan");
+					span.appendChild(div);
+				}
+				
+				function deleteAnswer(i){
+					var delDiv = document.getElementById("answer" + i);
+						if(delDiv != null){
+							delDiv.parentNode.removeChild(delDiv);
+					}
+				} 
+				
+				function makePoll(){
+					if(document.getElementById("question").value  == ""){
+						alert("질문을 입력하세요.");
+						return;
+					}
+					
+					//배열 
+					var answer = document.getElementsByName("answer");
+						for(var i = 0; i < answer.length; i ++){
+							if(answer[i].value == ""){
+								alert("답변을 입력하세요.");
+								return;
+							}
+						}
+				/* 	document.poll.action = "http://www.naver.com";
+					document.poll.submit(); */
+				
+					var form = document.getElementById("poll");
+					form.setAttribute("action", "http://www.naver.com");
+					form.submit();
+					
+					//Jquery 표현
+					/* $("#poll").attr("action", "http://www.naver.com").submit(); */
+					
+				}
+				
+			</script>
+	
+	</head>
+<body>
+	<div align="center">
+		<h3>설문 조사</h3>
+		<form name = "poll" id = "poll" action="" onsubmit="return false;">
+			<table>
+				<tr>
+
+					<td class="td1">질문</td>
+					<td class="td2"><input type="text" name="question" id = "question"></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="td1" valign="top">답변<br>
+						<button onclick="javascript : appendAnswer();">추가</button></td>
+
+					<td class="td2">
+						<div>
+							<input type="text" name="answer" id="answer">
+						</div>
+						<span id="answerSpan"></span>
+
+					</td>
+
+				</tr>
+
+				<tr>
+					<td colspan="2" class="td1">
+						<button onclick = "javascript : makePoll();">만들기</button>
+					</td>
+
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

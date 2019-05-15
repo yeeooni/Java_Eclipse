@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="ko">
+		 
+		 <head>
+			  <meta charset="UTF-8">
+			  <title>Document</title>
+		 </head>
+	 
+	 <body>
+	 	<!-- name = 아무이름을 정해준다. action = 이동해야할 url method = get/post -->
+		<!-- submit 하는 순간 action 경로로 이동한다. -->
+		<!--  method는 항상 기본이 get방식으로 정해져있다. -->
+	 		<form name ="testform" method ="GET/POST" action ="url">	
+				
+				<ul type = "none">
+					<li>
+
+						<label for = "userid">아이디</label>
+						<!-- maxlength 문자열의 길이, size 크기 -->
+						<input type ="text" name = "userid" id = "userid" maxlength = "12">
+
+					</li>
+
+					<li>
+
+						<label for = "pass">비밀번호</label>
+						<input type ="password" name = "pass" id = "pass">
+
+					</li>
+
+					<li><input type = "submit" value = "로그인"></li>
+					<!-- reset은 초기화 -->
+					<li><input type = "reset" value = "취소"> </li>
+					
+				</ul>
+						
+					
+
+			</form>
+	  
+	 </body>
+
+</html>

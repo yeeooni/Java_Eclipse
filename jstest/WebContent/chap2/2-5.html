@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>시계 구현</title>
+
+	<script type="text/javascript">
+	
+		function startTime() {
+			window.setInterval(showTime, 1000);
+		}
+	
+		function showTime() { 
+			var date = new Date();
+			var view = document.getElementById("viewtime");
+			view.innerHTML = '<font color="black" size = "15">' + date + '</font>';	
+		}
+		
+	</script>
+
+</head>
+		<body>
+
+			<div id = "viewtime" align="center"></div>
+			<button onclick="startTime();">시간흐르기</button>
+
+		</body>
+</html>

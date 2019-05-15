@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+
+
+</head>
+<body>
+	
+	<div id = "div1">눌러보세요.</div>
+	<div id = "div2">눌러보세요2.</div>
+	
+	<script type="text/javascript">
+	
+		document.getElementById("div1").onclick = function(){
+				alert("안녕하세요.");
+			};
+			
+		document.getElementById("div2").addEventListener("click", openAlert, false); 
+			
+	
+		function openAlert(){
+			alert("반갑습니다.");
+		}
+			
+			
+		
+	</script>
+
+
+</body>
+</html>

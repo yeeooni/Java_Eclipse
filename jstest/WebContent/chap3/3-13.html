@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>function</title>
+	<script type="text/javascript">
+	
+		function sum1(num){
+			var sum = 0;
+			
+			for(var i = 1; i <=num; i++){
+				sum += i;
+			}
+			console.log(sum);
+		}
+		sum1(10);
+		
+		var sum2 = function(num){
+			var sum = 0;
+			
+			for(var i = 1; i <=num; i++){
+				sum += i;
+			}
+			console.log(sum);
+		}
+		sum2(10);
+		
+		var sum3 = new Function("num", "var sum = 0;" + "for(var i = 1; i <= num; i++){" + "sum += i;" + "}" + "console.log(sum);");
+		sum3(10);
+		
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

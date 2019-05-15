@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Java script 객체</title>
+
+			<script type="text/javascript">
+				var empty_object = {};
+				var member = {
+					"user-name" : "홍길동",
+					"age" : 20,
+					"city" : "서울"
+				};
+			
+				console.log(member.age);
+				console.log(member["age"]);
+				console.log(member.city);
+				console.log(member["user-name"]);
+			
+				//동적으로 객체 추가
+				member.tel = "010-2111-6422";
+				console.log(member.tel);
+			
+				var object = member;
+				member.city = "제주도";
+				member.age = "31";
+				member["user-name"] = "김의연";
+			
+				console.log(object.city);
+				console.log(object["user-name"]);
+				console.log(object.age);
+			</script>
+
+	</head>
+
+
+<body>
+
+</body>
+</html>

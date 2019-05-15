@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>form control test - 회원가입</title>
+	<style type="text/css">
+	
+		body{
+			align-items: center;
+		}
+	
+		table{
+			align-content: center;
+			background-color: pink;
+		}
+	
+		tbody{
+			
+		}	
+	
+	</style>
+</head>
+
+<body>
+	<!-- <fieldset> -->
+	<!--	<legend> table </legend> -->
+		<table border="1" align = "center">
+			<caption>
+				<h2>form control test - 회원가입</h2>
+			</caption>
+
+			<tbody>
+				<tr>
+					<td align="center">이름</td>
+					<td><input type="text" /></td>
+				</tr>
+
+				<tr>
+					
+					<td align="center">아이디</td>
+					<td><input type="text" />
+					<button value="submit">중복확인</button></td>
+
+				</tr>
+
+				<tr>
+					<td align="center">비밀번호</td>
+					<td><input type="password" /></td>
+				</tr>
+
+				<tr>
+					<td align="center">비밀번호 확인</td>
+					<td><input type="password" /></td>
+				</tr>
+
+				<tr>
+					<td align="center">성별</td>
+					<td><input type="radio" name="gender" value="m"
+						checked="checked">남<input type="radio" name="gender"
+						value="f">여</td>
+
+				</tr>
+
+				<tr>
+					<td colspan="2" align="center">좋아하는 과일</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="center"><input type="checkbox"
+						name="fruit" value="apple" />사과<input type="checkbox" name="fruit"
+						value="watermellon" />수박<input type="checkbox" name="fruit"
+						value="딸기" />딸기<input type="checkbox" name="fruit" value="포도" />포도</td>
+				</tr>
+
+				<tr align="center">
+					<td>이메일</td>
+					<td><input type="email"> @ <select id="wepsite"
+						name="wepsite"><option value="naver" selected="selected">네이버</option>
+							<option value="daum">다음</option></select> <input type="url" /></td>
+				</tr>
+
+				<tr align="center">
+					<td>연락처</td>
+					<td><select id="tel" name="tel"><option value="02"
+								selected="selected">02</option>
+								<option value="031">031</option></select>-<input type="tel">-<input
+						type="tel"></td>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="center"><button type="submit">회원가입</button>
+						<button type="reset">초기화</button></td>
+				</tr>
+			</tbody>
+
+		</table>
+	</fieldset>
+
+</body>
+
+</html>

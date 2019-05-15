@@ -1,0 +1,80 @@
+** JSP (Java Server Page)
+
+- Servlet(*.java) : html in java (java 안에  html)
+- jsp(*.jsp) : java in html (html 안에 java) :: html 동급 
+	jsp는 servlet으로 바뀌어서 실행
+	
+* 언어의 종류
+	Compile 기반 : Servlet, jsp(run) 장점 : 실행시점에 기계가 인식할 수 있는 코드로 변환 속도가 빠르다. / 단점 : 코딩하기가 어렵다.
+  	Script 기반 : jsp, asp, php 장점 : 코딩하기가 쉽다. 단점 : 사람이 인식하기 쉬운 언어이기 때문에 속도가 느리다. 하지만 but!!
+		jsp는 코딩할 때 Script 기반이면서 실행할 때는 Servlet으로 최초에 한번만 변환된다.(최종적으로 바뀐 수정시간으로).
+		톰캣 서버의 jsp는 work라는 폴더에서 담당한다. Catalina..
+	
+	
+-- Script Element : <% java code %>
+
+1. 선언부 : jsp에서 사용될 변수, 메소드를 선언하는 영역.
+	형식) <%! java code %>
+		예)
+			<%!
+				String name;
+				int age;
+				
+				public void set(){
+				
+				}
+			%>
+		
+
+2. 처리부 : jsp가 호출 될 때마다 매번 실행 되는 영역. >> service method
+			request, response 관련 내용을 코딩한다.
+	형식) <% java code %>
+		예)
+			<%
+				name = request.getParameter("name");
+				
+				out.println(name);
+			%>
+	
+3. 출력부 : client 출력
+	형식) <%= 문자열 %>
+		예)
+			<%= name %> == <% out.println(name); %>
+		
+
+	public class ClassName [servlet] {
+	
+		선언부 ( 변수, 메소드(){} )
+	
+		public void service(request, response){
+		
+			처리부 
+			
+			out.println(""); //출력부 또는 표현식 
+		}
+	
+	}
+	
+-- directive (지시문) : <%@ 종류 속성1="값1" 속성2="값2"....속성n="값n" %>
+1. page
+	contentType = "text/html; charset = utf-8" 기본은 "euc-kr" 
+		text로 만들어진 html 문서를 보낼 때 utf-8로 인코딩해서  
+	info = " jsp의 설명문 "
+	import ="java.io.*" / import ="java.io.*,java.sql.*"
+	session 의 defualt 값은 true 다.
+	buffer = 서버가 내용을 클라이언트에 보낼 때 buffer에 잠시 저장해서 한꺼번에 보내준다.  / autoFlush = 버퍼가 꽉 차면(8kb)를 받으면 자동으로 지워준다. 
+		실질적으로 jsp에서 설정은 하지 않는다. 서버에 지정을 해둔다.
+	isThreadsafe defualt 값 true
+		사용자가 Thread를 관리할건가?
+	errorPage 는 server에서 관리하는게 좋다.
+	
+	****** 속성과 속성사이에는 반드시 공백이 있어야 한다. ******
+	**** 항상 문서에 첫번째에서 지시해야 한다. ****
+		
+2. include
+
+3. taglib
+	
+	
+	// java source 경로 
+	workspace >> .metadata >> .plugins >> org.eclipse.wst.server.core >> tmp0 >> work >> catalina >> localhost
