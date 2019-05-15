@@ -1,0 +1,58 @@
+membermvc
+	src
+		- com.kitri.admin.controller
+			AdminController.java (Servlet : /admin)
+		
+		- com.kitri.admin.model
+		
+		- com.kitri.admin.model.service
+			AdminService.java (I)
+			AdminServiceImpl.java
+		
+		- com.kitri.admin.model.dao
+			AdminDao.java (I)
+			AdminDaoImpl.java
+		
+		- com.kitri.member.controller
+			MemberController.java (Servlet : /user)
+		
+		- com.kitri.member.model
+			MemberDto.java
+			MemberDetailDto.java
+			ZipcodeDto.java
+		
+		- com.kitri.member.model.service
+			MemberService.java (I)
+			MemberServiceImpl.java
+		
+		- com.kitri.member.model.dao
+			MemberDao.java (I)
+			MemberDaoImpl.java
+		
+		- com.kitri.util
+			DBConnection.java
+			DBclose.java
+			Encoder.java
+	
+	webcontent
+		- js : member.js
+		- css : member.css
+		- img : *.jpg, png, gif
+		- admin : 
+			- member
+			 	memberlist.jsp
+		- user :
+			- member :
+				member.jsp
+				registerok.jsp
+				registerfail.jsp
+				idcheck.jsp
+				zipsearch.jsp
+				membermodify.jsp
+				
+			- login :
+				login.jsp
+				loginok.jsp
+				loginfail.jsp
+				
+		index.jsp
