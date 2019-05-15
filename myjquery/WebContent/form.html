@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>form</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script type = "text/javascript">
+		//Jquery
+		/* $(document).ready(function(){
+			
+		}); */
+		$(function(){
+			var $formObj = $("form");
+			
+			$formObj.submit(function(){
+				var $tObj = $("input[name = t]");
+				var $tObjValue = $tObj.val().trim();
+						if ($tObjValue.length == 0){
+							alert("반드시 입력하세요.");
+							$tObj.focus();
+							return false;
+						} else {
+							alert("전송 되었습니다.");
+							$formObj.attr("action", "http://www.naver.com");
+							$formObj.attr("method", "post");
+						}
+					});
+				});
+		
+		/* javascipt  */
+			/* window.addEventListener("load", function(){
+					//dom트리에서 input 태그 중 type 속성 값이 submit인 객체찾기
+					var submitObj = document.querySelector("input[type=submit]");
+					// submitObj에서 클릭 이벤트 핸들러 작성하기
+						submitObj.addEventListener("click", function(){
+							//할일 : 클릭 되었습니다. 경고창 띄우기
+							alert("클릭되었습니다.");
+						});
+					
+					//dom트리에서 form 객체 찾기
+					var formObj = document.querySelector("form");
+					formObj.addEventListener("submit", function(event){
+						// input 객체 중 name 속성이 t 인 객체 찾기
+						var tObj = document.querySelector("input[name = t]");
+						var tObjValue = tObj.value.trim();
+							if(tObjValue.length == 0){
+								alert("반드시 입력하세요.");
+								tObj.focus();
+								event.preventDefault();
+							} else {
+								alert("전송되었습니다.");
+								formObj.action = "http://www.naver.com";
+								formObj.submit();
+							}
+					});
+			}); */
+			
+		</script>
+	
+	</head>
+		<body>
+				<form action = "http://www.google.com">
+				<!-- 서버쪽에 데이터를 전송하기 위해 name 속성값을 적용해준다.  -->
+					<input name = "t"> <br/>
+					<input type ="password" name = "p"> <br/>
+					<input type ="checkbox" name = "c" value = "1"> ONE
+					<input type ="checkbox" name = "c" value = "2"> TWO
+					<input type ="checkbox" name = "c" value = "3"> THREE <br/>
+					<select name = "s"> 
+						<option value = "1">ONE</option>
+						<option value = "2">TWO</option>
+						<option value = "3">THREE</option>
+					</select>
+					<input type = "submit" value = "전송1">
+					<input type = "button" value = "버튼1">
+					<button>전송2</button>
+				</form>
+				
+				<!-- 폼태그밖에 벗어나기때문에 역할이 무의미  -->
+				<button>버튼2</button>
+		</body>
+</html>

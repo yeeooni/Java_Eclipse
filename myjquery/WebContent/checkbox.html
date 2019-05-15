@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>checkbox</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script>
+	/* jquery  */
+			$(function(){
+					var check = $("div > input[type = checkbox]");
+					//배열에 저장되는 객체는 자바스크립트
+					var allObj = check[0];
+					var $allObj = $(allObj);
+					$.allObj.click(function(){
+						for(var i = 0; i < check.length; i ++){
+							//$(check[i]).attr("checked", $(allObj).attr("checked"));
+							$(check[i]).prop("checked", $allObj.prop("checked"));
+					});
+			});
+	
+	
+			// javascript	
+			//all 체크박스를 클릭했을 경우 나머지 전체 체크박스도 체크되도록.
+			/* window.addEventListener("load", function(){
+				var check = document.querySelectorAll("input[type = checkbox]");
+					var all = check[0];
+						all.addEventListener("click", function(){
+							for(var i = 0; i < check.length; i ++){
+								check[i].checked = all.checked;
+							}													
+					});
+			}); */
+	
+	</script>
+
+</head>
+<body>
+		<div>
+			<input type = "checkbox" name = "all"> ALL
+		</div>
+
+			<div>
+				<input type = "checkbox" checked = "checked" name = "1"> one
+				<input type = "checkbox" name = "2"> two
+				<input type = "checkbox" name ="3"> three
+			</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>first</title>
+	<!-- cdn host  -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	</head>
+			<!-- jquery 구문  -->
+			<script>
+			
+			$(document).ready(function(){
+				/* var all = document.querySelectorAll("body > p"); */
+				var $all = $("body > p");
+				
+				$all.click(function(){
+				
+					/* 그냥 this만 쓰면 자바스크립트에서 사용할 수 있는 영역 
+						jquery에서 제공하는 다양한 메소드를 사용할 수 있다. */
+					/*  this.style.display = 'none';  */
+					$(this).hide();
+					
+				});
+			});
+			
+			/* head 영역에 script가 먼저 읽어질 때 */
+				 	/* function f1(){ */
+						/* obj.style.display = 'none'; */
+						/*  this.style.display = 'none';  */
+					/* } */
+			
+					/* window.addEventListener("load",function f1(){ */
+						/* obj.style.display = 'none'; */
+						/*  this.style.display = 'none';  */
+					/* }); */ 
+					
+				// javascript 구문===================================	
+				/* 	function f1(){
+						/* obj.style.display = 'none'; */
+						/*  this.style.display = 'none';  */
+					/* } */ 
+				
+				/* body > p child selector  */
+					/* var all = document.querySelectorAll("p");
+						for(var i = 0; i < all.length; i++){
+							var obj = all[i];
+							obj.addEventListener("click", f1); */
+					/* obj.addEventListener("click", function(){
+								obj.style.display = 'none'; */
+								/* this.style.display = 'none'; */
+							/* }); */
+						/* } */
+		
+					
+			</script>
+			<body>
+			
+			<p>If you click on me, I will disappear.</p>
+			<p>Click me away!</p>
+			<p>Click me too!</p>
+			
+		
+			</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>scope</title>
+			<script>
+					var a;
+					console.log(a); //undifined
+					console.log(a + 1); //NaN
+					
+					var a = 10;
+					console.log(a); //10
+					
+					var b = function(){
+						var lv = 'hello';
+						gv = 'Grobal';
+							for(var i = 0; i < 10; i ++){
+								console.log(i + ","+ lv + gv);
+							}
+						console.log('in function lv = ' + lv);
+						console.log('in function i = ' + i);
+						console.log('in function gv = ' + gv);
+					}
+					
+					console.log(typeof(b)); //function
+					console.log(b); 
+					b();
+					
+					console.log('out function = ' + lv); // lv is not defined
+					console.log('out function = ' + gv);
+			</script>
+			
+			<script>
+				window.addEventListener("load", function(){
+					var arr = document.querySelectorAll("button");
+						for(var i = 0; i < arr.length; i ++){
+							var btObj = arr[i];
+						(	
+						function(j){
+								btObj.addEventListener("click", function(){
+									var ainput = document.querySelector("input[name =a]");
+									var binput = document.querySelector("input[name =b]");
+									var anumber = parseInt(ainput.value);
+									var bnumber = parseInt(binput.value);
+									
+									/* 	alert(j + "번째 버튼이 클릭 되었습니다."); */
+										switch(j){
+										case 1 : alert(anumber + bnumber);
+											break;
+										case 2 : alert(anumber - bnumber);
+											break;
+										case 3 : alert(anumber * bnumber);
+											break;
+										case 4 : alert(anumber / bnumber);
+											break;
+										}
+								});
+							}
+						)(i + 1);
+					}
+				});
+			</script>
+	</head>
+<body>
+	
+	<input type ="text" name ="a">
+	<input type ="text" name ="b">
+	
+	<button>+</button>
+	<button>-</button>
+	<button>*</button>
+	<button>/</button>
+
+</body>
+</html>
