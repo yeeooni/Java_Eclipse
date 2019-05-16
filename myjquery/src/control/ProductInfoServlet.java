@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kitri.dto.Product;
 import com.kitri.service.ProductService;
 
-@WebServlet("/productInfoServlet")
+@WebServlet("/productInfo")
 public class ProductInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -23,9 +23,9 @@ public class ProductInfoServlet extends HttpServlet {
 		Product prodNo = ps.findByNo();
 		
 		request.setAttribute("prod_No", prodNo);
-		System.out.println(prodNo);
+//		System.out.println(prodNo);
 		
-		String path = "/product.jsp";
+		String path = "/content.jsp";
 		
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);

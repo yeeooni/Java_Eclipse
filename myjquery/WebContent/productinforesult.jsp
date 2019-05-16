@@ -13,15 +13,18 @@
 
 <script type="text/javascript">
 	$(function(){
+		var $obj = $("a");
+		$obj.click(function(){
 		$.ajax({
 			method : 'get',
-			url : "/myjquery/productInfoServlet",
-			data : $("div").serialize(),
+			url : '/myjquery/productInfoServlet',
+			data : $obj.attr("href"),
 			success : function(result){
 				$("section").html(result);
 			}
 		});
 	});
+});
 </script>
 </head>
 <body>

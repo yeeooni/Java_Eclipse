@@ -13,7 +13,7 @@
 	$(function() {
 		$.ajax({
 			method : 'get',
-			url : "/myjquery/productInfo",
+			url : "/myjquery/productList",
 			success : function(result) {
 				$("div").html(result.trim());
 			}

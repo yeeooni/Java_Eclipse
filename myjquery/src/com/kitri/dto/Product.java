@@ -8,7 +8,7 @@ public class Product {//자식엔티티
 	private String prod_detail;
 
 	// has a 관계로 표현
-	//private String prod_cate;
+	// private String prod_cate;
 	// productcategory에 있는 cate_no를 참조해서 사용해야 하기 때문에 아래 처럼 선언해준다.
 	ProductCategory productCategory;
 
