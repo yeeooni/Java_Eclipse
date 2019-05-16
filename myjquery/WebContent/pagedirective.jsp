@@ -4,7 +4,6 @@
 <%@page buffer = "100kb" %>
 <%@page errorPage = "err.jsp" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +11,7 @@
 <title>pagedirective</title>
 </head>
 <body>
+
 	<% // 1~ 10000까지 출력
 		for(int i = 1; i <=10000; i++){
 	%><%= i%>
