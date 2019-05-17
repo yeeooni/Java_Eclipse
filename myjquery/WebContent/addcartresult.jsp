@@ -1,11 +1,13 @@
 
+<%@page import="java.util.Set"%>
 <%@page import="com.kitri.dto.Product"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
-    	Map<Product, Integer> map = (Map) request.getAttribute("rcart"); 
+    	Map<Product, Integer> c = (Map) request.getAttribute("rcart"); 
+    	Set<Product> keys = c.keySet();
     %>
 
     <script>
@@ -19,15 +21,9 @@
     	
     		$(arr[1]).click(function(){
     			alert("장바구니 보기를 클릭했습니다.");
-			$.ajax({
-				method : 'get',
-    			success : function(result){
-    				$("div").append(result);
-    			}
-				});
+				$("nav > ul > li > a[href=viewcart]").trigger("click");
         	});
     	});
-		
     
     </script>
     
