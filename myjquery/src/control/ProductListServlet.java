@@ -19,18 +19,21 @@ import com.kitri.service.ProductService;
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public ProductListServlet() {
-        super();
-    }
-
+		// 서비스 객체를 한번만 호출하기 위해서
+		private ProductService productService;
+		public ProductListServlet() {
+			productService = new ProductService();
+		}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			ProductService ps = new ProductService();
-			List<Product> list = new ArrayList<Product>();
-			list = ps.findAll();
+			
+			List<Product> list =  productService.findAll();
 //			System.out.println(list);
 			request.setAttribute("list", list);
 			
-			String path = "/content.jsp";
+			// ServerSide WebContext 안쪽부터 
+			String path = "/productlistresult.jsp"; 
+		/* String path = "/content.jsp"; */
 			
 			RequestDispatcher rd = request.getRequestDispatcher(path);
 			rd.forward(request, response);

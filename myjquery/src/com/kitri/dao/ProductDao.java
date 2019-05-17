@@ -39,6 +39,7 @@ public class ProductDao {
 			rs = pstmt.executeQuery();
 	
 			while (rs.next()) {
+				
 				String prod_no = rs.getString("prod_no");
 				String prod_name = rs.getString("prod_name");
 				int prod_price = rs.getInt("prod_price");
@@ -54,10 +55,8 @@ public class ProductDao {
 			}
 
 		} catch (ClassNotFoundException e) {
-
 			e.printStackTrace();
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		} finally {
 			// 5) 연결 닫기
@@ -87,16 +86,15 @@ public class ProductDao {
 			}
 
 		}
-
 		return list;
-
 	}
 
-	public Product selectByNo() {
+	public Product selectByNo(String prodNo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Product p = null;
+		
 		try {
 			// 드라이버 연결
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -109,14 +107,16 @@ public class ProductDao {
 			sql.append("SELECT cate_no, cate_name, prod_no, prod_name, prod_price, prod_detail \n");
 			sql.append("FROM product p JOIN product_category pc \n"); 
 			sql.append("ON p.prod_cate = pc.cate_no \n"); 
-			sql.append("WERER prod_no = ? \n");
-		    sql.append("ORDER BY prod_name \n");
+			sql.append("WHERE prod_no = ? \n");
 
 		    pstmt = conn.prepareStatement(sql.toString());
+
+		    pstmt.setString(1, prodNo);
 		    
 		    rs = pstmt.executeQuery();
 		    
 		    if(rs.next()) {
+		    	
 		    	String prod_no = rs.getString("prod_no");
 				String prod_name = rs.getString("prod_name");
 				int prod_price = rs.getInt("prod_price");
@@ -128,46 +128,34 @@ public class ProductDao {
 				ProductCategory pc = new ProductCategory(cate_no, cate_name);
 				p = new Product(prod_no, prod_name, prod_price, prod_detail, pc);
 				
+		    } else {
+		    	System.out.println("들어오지 않았습니다.");
 		    }
 	
 		} catch (ClassNotFoundException e) {
-			
 			e.printStackTrace();
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}finally {
-			if(rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
+				if(rs != null)
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				if(pstmt != null)
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				if(conn != null)
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
-			if(pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			if(conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			
+			return p;
 		}
-		
-		return p;
-
-	}
-	
-	
-	
-	
-	
-	
 }

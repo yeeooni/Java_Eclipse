@@ -11,6 +11,10 @@ public class Product {//자식엔티티
 	// private String prod_cate;
 	// productcategory에 있는 cate_no를 참조해서 사용해야 하기 때문에 아래 처럼 선언해준다.
 	ProductCategory productCategory;
+	
+	public Product() {
+		
+	}
 
 	public Product(String prod_no, String prod_name, int prod_price, String prod_detail,
 			ProductCategory productCategory) {
@@ -62,4 +66,51 @@ public class Product {//자식엔티티
 		this.productCategory = productCategory;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((prod_detail == null) ? 0 : prod_detail.hashCode());
+		result = prime * result + ((prod_name == null) ? 0 : prod_name.hashCode());
+		result = prime * result + ((prod_no == null) ? 0 : prod_no.hashCode());
+		result = prime * result + prod_price;
+		result = prime * result + ((productCategory == null) ? 0 : productCategory.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (prod_detail == null) {
+			if (other.prod_detail != null)
+				return false;
+		} else if (!prod_detail.equals(other.prod_detail))
+			return false;
+		if (prod_name == null) {
+			if (other.prod_name != null)
+				return false;
+		} else if (!prod_name.equals(other.prod_name))
+			return false;
+		if (prod_no == null) {
+			if (other.prod_no != null)
+				return false;
+		} else if (!prod_no.equals(other.prod_no))
+			return false;
+		if (prod_price != other.prod_price)
+			return false;
+		if (productCategory == null) {
+			if (other.productCategory != null)
+				return false;
+		} else if (!productCategory.equals(other.productCategory))
+			return false;
+		return true;
+	}
+
+	
 }

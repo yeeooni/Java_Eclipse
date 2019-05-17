@@ -72,11 +72,11 @@ public class SelectTest {
 //	}
 //	
 	public MemberDto memberSearch(int no) {
+		
 		MemberDto memberDto = null;
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
 		
 		try {
 			con = makeConnection();
@@ -87,6 +87,7 @@ public class SelectTest {
 			sql += "where no = '" + no + "'";
 				
 			stmt = con.createStatement();
+			
 			rs = stmt.executeQuery(sql);
 			
 			if(rs.next()) {

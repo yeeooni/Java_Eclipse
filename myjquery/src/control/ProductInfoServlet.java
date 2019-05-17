@@ -17,19 +17,26 @@ import com.kitri.service.ProductService;
 @WebServlet("/productInfo")
 public class ProductInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+    	
+	private ProductService productService;
+	public ProductInfoServlet() {
+		productService = new ProductService();
+	}
+			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductService ps = new ProductService();
-		Product prodNo = ps.findByNo();
+	
+		String prodNo = request.getParameter("no");
+		//System.out.println("prod_no =" + prodNo);
+		Product product = productService.findByNo(prodNo);
+	
+		 //System.out.println(product); 
+		request.setAttribute("product", product);
 		
-		request.setAttribute("prod_No", prodNo);
-//		System.out.println(prodNo);
-		
-		String path = "/content.jsp";
+		String path = "/productinforesult.jsp";
+		/* String path = "/content.jsp"; */
 		
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
-		
 		}
 	}
 

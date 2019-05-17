@@ -17,9 +17,9 @@ public class ProductService {
 	public List<Product> findAll(){
 		return dao.selectAll();
 	}
-	
-	public Product findByNo() {
-		return dao.selectByNo();
+
+	public Product findByNo(String prodNo) {
+		return dao.selectByNo(prodNo);
 	}
 	
 }

@@ -9,5 +9,8 @@
 <%} else{ %>
 				<!-- 로그인이 성공된 사람이 보일 화면 -->  
 				<li><a href = "logout"> 로그아웃 </a></li>
+				<li><a href ="productList">상품 목록</a></li>
+				<li><a href = "viewcart">장바구니 보기</a></li>
+				<li><a href ="vieworder">주문내역 보기</a></li>
 <% } %>
 			</ul>
