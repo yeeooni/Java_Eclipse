@@ -10,5 +10,4 @@ public interface AdminDao {
 	public List<MemberDetailDto> getMemberList(Map<String, String> map);
 
 	
-	
 }
