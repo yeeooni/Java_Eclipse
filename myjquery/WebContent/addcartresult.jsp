@@ -1,8 +1,20 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/yeeooni/Window_Eclipse.git
 <%@page import="java.util.Set"%>
 <%@page import="com.kitri.dto.Product"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+=======
+    
+    <%
+    	Map<Product, Integer> c = (Map) request.getAttribute("rcart"); 
+    	Set<Product> keys = c.keySet();
+    %>
+>>>>>>> branch 'master' of https://github.com/yeeooni/Window_Eclipse.git
 
     <script>
     	$(function(){
@@ -17,12 +29,20 @@
     	
     		$(arr[1]).click(function(){
     			alert("장바구니 보기를 클릭했습니다.");
+<<<<<<< HEAD
     			alert($("nav > ul > li > a[href=viewcart]"));
   				$("nav > ul > li > a[href=viewcart]").trigger("click");
   			
     			return false;
+=======
+				$("nav > ul > li > a[href=viewcart]").trigger("click");
+>>>>>>> branch 'master' of https://github.com/yeeooni/Window_Eclipse.git
         	});
     	});
+<<<<<<< HEAD
+=======
+    
+>>>>>>> branch 'master' of https://github.com/yeeooni/Window_Eclipse.git
     </script>
     
     
