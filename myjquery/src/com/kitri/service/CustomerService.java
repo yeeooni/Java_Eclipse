@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.kitri.dao.CustomerDao;
 import com.kitri.dto.Customer;
-import com.kitri.exception.NotFoundException;
+import com.kitri.exception.AddException;
 
 public class CustomerService {
 
@@ -25,7 +25,7 @@ public class CustomerService {
 				result = "-1";
 			}
 			
-		} catch (NotFoundException | SQLException e) {
+		} catch (AddException | SQLException e) {
 			result = "회원검색 실패";
 			e.printStackTrace();
 		}

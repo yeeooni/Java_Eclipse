@@ -40,14 +40,18 @@ $(function(){
 	});
 	var $btAddOrder = $("div.viewcartresult>table tr>td>button.addorder");
 	$btAddOrder.click(function(){
-
 		alert("주문하기 클릭!");
-		/* $.ajax({
+		 $.ajax({
 			url:"addorder",
 			method:"get",
 			success:function(result){
+					if(result.trim() == '1'){
+						
+					}else{
+						alert("주문실패");
+					}
 			}
-		}); */
+		}); 
 		return false;
 	});
 });
@@ -55,9 +59,10 @@ $(function(){
 <div class="viewcartresult">
  <h3>장바구니 내용</h3>
 <%
-Map<Product,Integer> rc = (Map)request.getAttribute("rcart");
-  Set<Product> keys = rc.keySet();
+	Map<Product,Integer> rc = (Map)request.getAttribute("rcart");
+  	Set<Product> keys = rc.keySet();
 %>    
+
  <table>
    <tr>
      <th>상품번호</th><th>상품명</th><th>상품가격</th><th>수량</th>     
@@ -70,7 +75,6 @@ Map<Product,Integer> rc = (Map)request.getAttribute("rcart");
      <td><%=p.getProd_price() %></td>
      <td><%=rc.get(p)%></td>
    </tr>
-   
    <%}//end for
    %>  
    <tr>

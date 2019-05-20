@@ -9,8 +9,10 @@
 	<script type="text/javascript">
 		$(function(){
 			// Dom 트리에서 nav > ul > li > a 객체들 찾기
+		
 			var arr = $("nav > ul > li > a");
 				$(arr).click(function(){
+					alert("success~~~~~");
 					var vUrl = $(this).attr("href");
 						if(vUrl == 'logout'){
 							$.ajax({
@@ -22,6 +24,7 @@
 								}
 							});
 						} else{
+							alert("success = " + vUrl);
 							$.ajax({
 								url : vUrl,
 								method : 'get',

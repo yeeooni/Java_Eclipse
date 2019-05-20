@@ -122,12 +122,17 @@ $(function(){
 		  data: 'no=<%=no%>&quantity=' + $("input[name=quantity]").val(),
 		  success : function(result) {
 				//$("div[class='product_list']").html(result.trim());
-					$("div[class='addcart']").remove();
-					$("div[class='product_list']").append(result.trim());		
-				}
-			});
+				console.log("success!");
+					$("div.addcartresult").remove();
+					$("section").append(result.trim());		
+				},
+			error : function(){
+				console.log("error");
+			}
 		});
+	return false;
 	});
+});
 </script>
 
 <div class="product_view">

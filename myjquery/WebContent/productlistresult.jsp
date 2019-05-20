@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
 <style>
 div.product_list ul > li.menuDataSet{
     float: left;
@@ -38,8 +38,7 @@ $(function(){
 </script>    
 <div class="product_list">
 <ul>
-<% List<Product> list = 
-         (List)request.getAttribute("list");
+<% List<Product> list = (List)request.getAttribute("list");
 
    for(Product p: list){    
 %>

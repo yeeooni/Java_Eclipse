@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kitri.dto.Customer;
-import com.kitri.exception.NotFoundException;
+import com.kitri.exception.AddException;
 
 public class CustomerDao {
 	
@@ -13,7 +13,7 @@ public class CustomerDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
-	public Customer selectById(String id) throws NotFoundException, SQLException {
+	public Customer selectById(String id) throws AddException, SQLException {
 
 		//(1) jdbc 로드
 		try {
@@ -38,11 +38,11 @@ public class CustomerDao {
 					c.setPass(rs.getString("pass"));
 					return c;
 				} else {
-					throw new NotFoundException("아이디에 해당하는 고객이 없습니다.");
+					throw new AddException("아이디에 해당하는 고객이 없습니다.");
 				}
 			
 		} catch (ClassNotFoundException e) {
-				throw new NotFoundException("e.getMessage()");
+				throw new AddException("e.getMessage()");
 		} finally {
 			if(rs != null)
 			rs.close();

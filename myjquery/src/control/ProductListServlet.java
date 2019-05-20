@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kitri.dto.Product;
 import com.kitri.service.ProductService;
 
-@WebServlet("/productList")
+@WebServlet("/productlist")
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
