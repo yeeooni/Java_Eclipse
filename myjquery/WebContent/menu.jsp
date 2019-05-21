@@ -12,5 +12,7 @@
 <% } %>
 				<li><a href ="productlist">상품 목록</a></li>
 				<li><a href ="viewcart">장바구니 보기</a></li>
+<%if(id != null ){//로그인을 한 경우  %>
 				<li><a href ="vieworder">주문내역 보기</a></li>
+<%} %>
 			</ul>

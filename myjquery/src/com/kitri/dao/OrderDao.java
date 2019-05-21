@@ -15,7 +15,7 @@ public class OrderDao {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// DB 연결
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "kitri", "kitri");
 			conn.setAutoCommit(false); // 자동 커밋 해제
 
 			insertInfo(conn, info); // 주문 기본 추가
@@ -69,8 +69,8 @@ public class OrderDao {
 
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into order_line(order_no, order_prod_no, order_quantity)";
-		sql += "values(order_seq.currval, ?, ?)";
+		String sql = "insert into order_line(order_no, order_prod_no, order_quantity) \n";
+		sql += "values(order_seq.currval, ?, ?) \n";
 
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
@@ -98,6 +98,7 @@ public class OrderDao {
 	}
 
 	public List<OrderInfo>selectById(String id){
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -105,26 +106,29 @@ public class OrderDao {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "kitri", "kitri");
 			
-			String sql = "SELECT info.order_no, order_dt, prod_no, prod_name, prod_price, order_quantity";
-			sql += "FROM order_info info JOIN order_line line ON info.order_no = line.order_no";
-			sql += "JOIN product p ON p.prod_no = line.ORDER_PROD_NO";
-			sql += "WHERE order_id = ?";
-			sql += "ORDER BY order_no DESC, prod_no";
+			String sql = "SELECT info.order_no, order_dt, prod_no, prod_name, prod_price, order_quantity \n";
+			sql += "FROM order_info info JOIN order_line line ON info.order_no = line.order_no \n";
+			sql += "JOIN product p ON p.prod_no = line.ORDER_PROD_NO \n";
+			sql += "WHERE order_id = ? \n";
+			sql += "ORDER BY order_no DESC, prod_no \n";
 			
 			pstmt = conn.prepareStatement(sql.toString());
+			
 			pstmt.setString(1, id);
+			
 			rs = pstmt.executeQuery();
+			
 			OrderInfo info = null;
 			OrderLine line = null;
 			List<OrderLine> lines = null;
-			int old_order_no = -1;
+			int old_order_no = -1; // 이전 주문 번호 
 			
 			while (rs.next()) {
 				int order_no = rs.getInt("order_no");
 				
-				if(old_order_no != order_no) {
+				if(old_order_no != order_no) { // 주문번호가 다를 경우 OrderInfo 객체 생성 리스트에 추가 
 					info = new OrderInfo();
 					list.add(info);
 					info.setOrder_no(order_no);
@@ -136,8 +140,14 @@ public class OrderDao {
 				
 				line = new OrderLine();
 				String prod_no = rs.getString("prod_no");
+				String prod_name = rs.getString("prod_name");
+				int prod_price = rs.getInt("prod_price");
+				
 				Product p = new Product();
 				p.setProd_no(prod_no);
+				p.setProd_name(prod_name);
+				p.setProd_price(prod_price);
+				
 				
 				line.setProduct(p);
 				line.setOrder_quantity(rs.getInt("order_quantity"));

@@ -121,13 +121,13 @@ $(function(){
 		  method: 'get',
 		  data: 'no=<%=no%>&quantity=' + $("input[name=quantity]").val(),
 		  success : function(result) {
-				//$("div[class='product_list']").html(result.trim());
 				console.log("success!");
+				//$("div[class='product_list']").html(result.trim());
 					$("div.addcartresult").remove();
 					$("section").append(result.trim());		
 				},
 			error : function(){
-				console.log("error");
+				console.log("error!!!!!!");
 			}
 		});
 	return false;

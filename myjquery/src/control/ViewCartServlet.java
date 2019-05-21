@@ -37,25 +37,24 @@ public class ViewCartServlet extends HttpServlet {
 			Set<Product> keys = c.keySet();
 
 			for (Product p : keys) {
-				System.out.println("향상 포문");
+				//System.out.println("향상 포문");
 //				for(Product p : c.keySet()) {
 
 				String no = p.getProd_no();
 					Product p1 = productService.findByNo(no);
 					int quantity = c.get(p1);
-					System.out.println("p no ="+p1.getProd_no());
+					System.out.println("p no : "+p1.getProd_no());
 					rc.put(p1, quantity);
-					System.out.println("~~~~~!!!!" + quantity);
+					System.out.println("quantity : " + quantity);
 
 //					System.out.println("p: "+p);
 //					System.out.println("p1: "+p1);
 //					System.out.println("c: "+c);
 
 			}
-			System.out.println(c.size());
 			request.setAttribute("rcart", rc);
 			int size = rc.size();
-			System.out.println(size);
+			//System.out.println( "c : " + size);
 			String path = "/viewcartresult.jsp";
 
 			RequestDispatcher rd = request.getRequestDispatcher(path);

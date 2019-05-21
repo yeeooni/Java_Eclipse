@@ -14,7 +14,8 @@
 		i = 99;
 	%>
 	
-	<%// experssion : _jspservice() 내부에 작성될 구문 
+	<%
+		// experssion : _jspservice() 내부에 작성될 구문 
 		// out.print()
 	%>
 	<%=i %>

@@ -15,7 +15,7 @@ public class AddCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("서블릿들어옴");
+		//System.out.println("서블릿들어옴");
 		String no = request.getParameter("no");
 		String quantity = request.getParameter("quantity");
 		
@@ -34,12 +34,11 @@ public class AddCartServlet extends HttpServlet {
 
 			int intquantity = Integer.parseInt(quantity);
 			
-			
 			// 장바구니에 해당상품이 존재하는지 확인한다.
 			Integer inte = c.get(p);
 			if(inte != null) { // 존재한다면 수량을 합친다.
 					intquantity += inte.intValue();
-					System.out.println("intquantity =" + intquantity);
+			//System.out.println("intquantity =" + intquantity);
 			}			
 			c.put(p,  intquantity); // 장바구니 상품 추가 
 			
