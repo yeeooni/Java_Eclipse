@@ -5,13 +5,21 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix ="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix ="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+
     <style>
     	div.vieworder > table, div.wieworder > table th {
-    		border-style :solid;
+    		bor
     	}
-    h3 {
-    	text-align: center;
-    }
+    	
+	    h3 {
+	    	text-align: center;
+	    }
+    	td { 
+    		text-align : center;
+    	}
+    	
     
     </style>
 <div class= "vieworder">
@@ -21,32 +29,23 @@
 		<th>주문번호</th><th>주문일자</th>
 		<th>상품번호</th><th>상품명</th><th>가격</th><th>수량</th>
 	</tr>
-<%List<OrderInfo> list = (List) request.getAttribute("orderlist");
-	for(OrderInfo info : list){
-%><tr>
-<% 	
-		int order_no = info.getOrder_no();
-		Date order_dt = info.getOrder_dt();
-		List<OrderLine> lines = info.getLines(); 
-%>	
-		<td rowspan=<%=lines.size()%>><%=order_no%></td>
-		<td rowspan=<%=lines.size()%>><%=order_dt%></td>
-		
-		
-<%		//주문 번호 하나당 상품 상세정보	
-			for(int i = 0; i < lines.size(); i++){ 
-%>
-<%			OrderLine line = lines.get(i);
-				Product p = line.getProduct();
-				String prod_no = p.getProd_no();
-				String prod_name = p.getProd_name();
-				int prod_price = p.getProd_price();
-				int order_quantity = line.getOrder_quantity();
-%>
-		<%=i > 0 ? "</tr><tr>" : "" %>
-		<td><%=prod_no %></td><td><%=prod_name%></td><td><%=prod_price%></td><td><%=order_quantity%></td>
-	<%}// end line %>
-	</tr>		
-<%}//end info %>
+		<c:forEach var ="info" items = "${requestScope.orderlist }">
+			<tr>
+				<c:set var = "order_no" value = "${info.order_no}"/>
+				<c:set var = "order_dt" value = "${info.order_dt }"/>
+				<c:set var = "lines" value = "${info.lines}"/>
+				<c:set var = "lineSize" value = "${fn:length(lines)}"/>
+					<td rowspan = "${lineSize }"> ${order_no }</td>
+					<td rowspan = "${lineSize }"> ${order_dt }</td>
+					
+					<c:forEach var = "line" items = "${lines }" varStatus = "obj">
+						<c:set var = "p" value = "${line.product }"/>
+							<c:if test = "${obj.index > 0 }">
+								</tr><tr>
+							</c:if>
+							<td>${p.prod_no }</td><td>${p.prod_name }</td><td>${p.prod_price }</td><td>${line.order_quantity }</td>
+					</c:forEach>
+			</tr>	
+		</c:forEach>
 	</table>
 </div>

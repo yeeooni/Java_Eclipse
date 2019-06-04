@@ -23,5 +23,16 @@
 	
 고객이름 :<%=((Customer)request.getAttribute("c")).getName()%>
 고객이름 : ${requestScope.c.name }
+
+<hr/>
+
+WebContextPath : /myeljstl <br/>
+WebContextPath : ${pageContext.request.contextPath}
+
+<%
+	request.getContextPath();
+%>
+
+
 </body>
 </html>

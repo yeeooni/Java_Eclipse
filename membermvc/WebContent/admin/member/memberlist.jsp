@@ -6,9 +6,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		memberList('','');
-		console.log('온로드');
+		//console.log('온로드');
 		$("#searchBtn").click(function() {
-			console.log('버튼눌려진다');
+			//console.log('버튼눌려진다');
 			var key = $("#key").val();
 			var word = $("#word").val();
 			$("#word").val(''); 

@@ -12,7 +12,7 @@
 		
 			var arr = $("nav > ul > li > a");
 				$(arr).click(function(){
-					alert("success~~~~~");
+					alert("success!");
 					var vUrl = $(this).attr("href");
 						if(vUrl == 'logout'){
 							$.ajax({

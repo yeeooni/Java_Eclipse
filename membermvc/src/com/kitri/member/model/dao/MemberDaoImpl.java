@@ -76,7 +76,7 @@ public class MemberDaoImpl implements MemberDao{
 			
 			StringBuffer sql = new StringBuffer();
 			
-			sql.append("select 	case  \n");
+			sql.append("SELECT 	case  \n");
 			sql.append("			when length(new_post_code) = 4 then '0'||new_post_code \n");
 			sql.append("			else new_post_code \n");
 			sql.append("		end zipcode,  \n");
@@ -86,8 +86,8 @@ public class MemberDaoImpl implements MemberDao{
 			sql.append("			then building_origin_number||'-'||building_refer_number  \n");
 			sql.append("			else trim(to_char(building_origin_number, '99999')) \n");
 			sql.append("		end building_number, sigugun_building_name \n");
-			sql.append("from 	postcode \n");
-			sql.append("where 	doro_kor like '%'||?||'%' \n");
+			sql.append("FROM 	postcode \n");
+			sql.append("WHERE 	doro_kor like '%'||?||'%' \n");
 			sql.append("or sigugun_building_name like '%'||?||'%' \n");
 			
 			pstmt = con.prepareStatement(sql.toString());
@@ -130,16 +130,17 @@ public class MemberDaoImpl implements MemberDao{
 
 					StringBuffer sql = new StringBuffer();
 
-					sql.append("insert all \n");
-					sql.append("	into member (name, id, pass, emailid, emaildomain, joindate)\n");
-					sql.append("	values(?, ?, ?, ?, ?, sysdate)\n");
-					sql.append("	into member_detail (id, zipcode, address, address_detail, tel1, tel2, tel3)\n");
-					sql.append("	values(?, ?, ?, ?, ?, ?, ?) \n");
-					sql.append("select * from dual \n");
+					sql.append("INSERT ALL \n");
+					sql.append("	INTO member (name, id, pass, emailid, emaildomain, joindate)\n");
+					sql.append("	VALUES(?, ?, ?, ?, ?, sysdate)\n");
+					sql.append("	INTO member_detail (id, zipcode, address, address_detail, tel1, tel2, tel3)\n");
+					sql.append("	VALUES(?, ?, ?, ?, ?, ?, ?) \n");
+					sql.append("SELECT * FROM DUAL \n");
 					
 					pstmt = con.prepareStatement(sql.toString());
 
 					int idx = 0;
+					
 					pstmt.setString(++idx, memberDetailDto.getName());
 					pstmt.setString(++idx, memberDetailDto.getId());
 					pstmt.setString(++idx, memberDetailDto.getPass());

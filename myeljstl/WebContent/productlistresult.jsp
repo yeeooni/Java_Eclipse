@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix ="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix ="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 div.product_list ul > li.menuDataSet{
     float: left;
@@ -51,11 +51,12 @@ $(function(){
 		        <dd class="category">카테고리:<span>${p.productCategory.cate_name}</span></dd>
 		        <dd class="no">상품번호:<span>${p.prod_no}</span></dd>
 		        <dd class="name">상품명:<span>${p.prod_name}</span></dd>
-		        <dd class="price">가격:<span>${p.prod_price}</span></dd>
-		    
+		        <dd class="price">가격:<span><fmt:formatNumber value = "${p.prod_price}" type = "currency" pattern = "#,###"/></span></dd>
 		      </dl> 
 		    </li>
 </c:forEach>
+
+
 <%-- List<Product> list = (List)request.getAttribute("list");
    for(Product p: list){    
 --%>
@@ -71,7 +72,6 @@ $(function(){
         <dd class="no">상품번호:<span><%=p.getProd_no() %></span></dd>
         <dd class="name">상품명:<span><%=p.getProd_name() %></span></dd>
         <dd class="price">가격:<span><%=p.getProd_price() %></span></dd>
-    
       </dl> 
     </li>
  --%>

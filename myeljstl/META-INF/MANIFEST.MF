@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: myeljstl
+Bundle-SymbolicName: myeljstl
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.kitri.dao,
+ com.kitri.dto,
+ com.kitri.exception,
+ com.kitri.service,
+ control

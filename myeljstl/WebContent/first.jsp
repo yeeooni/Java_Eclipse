@@ -27,12 +27,14 @@
 	<hr/>
 	<h3>지시자(directive)</h3>
 	<ul>
-		<li> page directive : 속성 -contentType, import, errorPage, isErrorPage, buffer 
+		<li> page directive : 속성 -contentType, import, errorPage, isErrorPage, buffer
+		
 			<%
 				Date date = new Date();
 				String patten = "yyyy-MM-dd";
 				SimpleDateFormat sdf = new SimpleDateFormat(patten);
-			%> <%=sdf.format(date)%>
+			%> 
+		, 현재날짜	:<%=sdf.format(date)%>
 		</li>
 		
 		<li> inclued directive  : 정적포함(.java 파일에 포함), 속성 -file </li>

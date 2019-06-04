@@ -1,8 +1,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import = "java.util.Map" %>
+<%@page import = "java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,6 +48,18 @@
 <hr/>
 	<c:forEach var ="e" varStatus = "obj" items="${requestScope.list }">
 		${obj.index} - ${e } : ${obj.count}회 <br/>
+	</c:forEach>
+	
+<%
+	Map<String, Integer> map = new HashMap<>();
+	map.put("one", 1);
+	map.put("two", 2);
+	map.put("three", 3);
+	request.setAttribute("map", map);
+
+%>
+	<c:forEach var = "e1" items = "${requestScope.map}">
+		${e1.key} : ${e1.value}
 	</c:forEach>
 	
 </body>

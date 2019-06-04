@@ -8,9 +8,9 @@ import com.kitri.member.model.MemberDto;
 import com.kitri.util.DBConnection;
 import com.kitri.util.DBclose;
 
-public class AdminDaoImpl  implements AdminDao{
+public class AdminDaoImpl  implements AdminDAO{
 	
-private static AdminDao adminDao;
+private static AdminDAO adminDao;
 	
 	static {
 		adminDao = new AdminDaoImpl();
@@ -18,7 +18,7 @@ private static AdminDao adminDao;
 	
 	private AdminDaoImpl () {}
 
-	public static AdminDao getAdminDao() {
+	public static AdminDAO getAdminDao() {
 		return adminDao;
 	}
 	
